@@ -1,0 +1,58 @@
+$date
+	Mon Feb 17 13:50:31 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module parity_tb $end
+$var wire 1 ! parity_out_fun1 $end
+$var wire 1 " parity_out_bitwise $end
+$var wire 1 # parity_out_assign $end
+$var reg 8 $ data_in [7:0] $end
+$scope module parity_assign $end
+$var wire 8 % data_in [7:0] $end
+$var wire 1 # parity_out $end
+$upscope $end
+$scope module parity_fun1 $end
+$var wire 8 & data_in [7:0] $end
+$var wire 1 ! parity_out $end
+$scope function parity $end
+$var reg 32 ' data [31:0] $end
+$upscope $end
+$upscope $end
+$scope module parity_using_bitwise $end
+$var wire 8 ( data_in [7:0] $end
+$var wire 1 " parity_out $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 (
+b0 '
+b0 &
+b0 %
+b0 $
+0#
+0"
+0!
+$end
+#50
+b11 '
+b11 $
+b11 %
+b11 &
+b11 (
+#100
+1#
+1!
+b10000 '
+1"
+b10000 $
+b10000 %
+b10000 &
+b10000 (
+#150
