@@ -15,7 +15,7 @@
         {
             "label": "Run GTKWave",
             "type": "shell",
-            "command": "cd ${fileDirname} ; gtkwave arbiter.vcd"
+            "command": "cd ${fileDirname} ; gtkwave divider.vcd"
         }
     ]
 }
