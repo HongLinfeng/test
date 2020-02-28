@@ -70,7 +70,7 @@ module adder(
                     rExpDiff <= rExp[7:0];
                 i <= i+1; 
             end
-            2：//,可以和上一步合并
+            2://,可以和上一步合并
             begin
                 if(rExp[8]==1)//A<B
                 begin   

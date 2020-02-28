@@ -1,6 +1,6 @@
 `include "adder.v"
-`timescale1 ps/1 ps 
-modulefloat_add_module_simulation();
+`timescale 1ps/1ps 
+module float_add_module_simulation();
 reg CLK;
 reg RSTn;
 reg Start_Sig; 
@@ -15,15 +15,15 @@ wire [31:0] Result;
 // wire [7:0]SQ_rExpDiff;
  /**********************************/ 
 adder U1 ( 
-    .CLK(CLK ),
-    .RSTn( RSTn), 
+    .clk(CLK ),
+    .rst_n( RSTn), 
     .A(A),
     .B(B ),
     .Result(Result ), 
     .Start_Sig( Start_Sig), 
-    .Done_Sig(Done_Sig), 
-    .SQ_rA(SQ_rA), 
-    .SQ_rB(SQ_rB),
+    .Done_Sig(Done_Sig) 
+    // .SQ_rA(SQ_rA), 
+    // .SQ_rB(SQ_rB)
 
 // .SQ_Temp( SQ_Temp),
 // .SQ_TempA(SQ_TempA), 
@@ -35,9 +35,12 @@ adder U1 (
 initial begin 
     $dumpfile("adder.vcd");
     $dumpvars;
-    RSTn= 0; #10RSTn= 1; 
-    CLK = 0; forever #5 CLK = ~CLK;
+    RSTn= 0;CLK = 0;  #10 RSTn= 1; 
+    //forever #5 CLK = ~CLK;
+    #2000 $finish;
+
 end 
+always #5 CLK = !CLK;
 /***********************************/ 
 reg [3:0]i; 
 always @ ( posedge CLK or negedge RSTn )
