@@ -57,27 +57,48 @@ module multiplyer(
                 rB <= {B[31:23],1'b1,B[22:0]};
 
                 rSign <= A[31]^B[31];
-                rExp <= A[30:23]+B[30:23]-8'd127+1'b1;
-                rM <= {1'b1,A[22:0]}*{1'b1,B[22:0]};
-
+                //rExp <= A[30:23]+B[30:23]-8'd127+1'b1;
+                //rM <= {1'b1,A[22:0]}*{1'b1,B[22:0]};
+                isOver <= 1'b0;
+                isUnder <= 1'b0;
+                isZero <= 1'b0;
                 i <= i + 1'b1;
             end
             1:
             begin
+                if(rA[31:24]==rB[31:24]&&(rA[22:0]!=23'd0 && rB[22:0]!=23'd0)||rA[32]^rB[32])
+                begin
+                    // rB[31:24]<= rB[31:24]+1'b1;
+                    // rB[23:0]<=rB[23:0]>>1;
+                end
+                i <= i+ 1'b1;
+
+            end
+            2:
+            begin
+                rExp <= rA[31:24]+rB[31:24]-8'd127;
+                rM <= rA[23:0]*rB[23:0];
+                i <= i+1'b1;
+            end
+            3:
+            begin
                 if(rM[47] ==  1'b1) 
+                begin
                     rM <= rM;
+                    rExp <= rExp + 1'b1;
+                end
                 else if(rM[46] ==  1'b1)
                 begin
                     rM <= rM << 1;
-                    rExp <= rExp -1'b1;
+                    //rExp <= rExp -1'b1;
                 end else if(rM[45]==1'b1)
                 begin
                     rM <= rM << 2;
-                    rExp <= rExp - 2'd2;
+                    rExp <= rExp - 1'b1;
                 end
                 i <= i+1'b1;
             end
-            2:
+            4:
             begin
                 if(rExp[9:8]==2'b01)
                 begin
@@ -97,12 +118,12 @@ module multiplyer(
                     rResult <= {rSign,rExp[7:0],rM[46:24]};
                 i <= i+1'b1;
             end
-            3:
+            5:
             begin
                 isDone <= 1'b1;
                 i <= i+1'b1;
             end
-            4:
+            6:
             begin
                 isDone <= 1'b0;
                 i <= 0;
